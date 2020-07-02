@@ -3,14 +3,44 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
-        'tittle',
+        'title',
+        'slug',
         'price',
         'vat',
         'description',
         'quantity',
     ];
+
+    public function getFirstImageUrl(): string
+    {
+        if($imageFirst = $this->getMedia('product_images')->first()){
+            return $imageFirst->getUrl();
+        }
+        return url('img/no_image.jpg');
+    }
+
+    public function getAllImagesUrls(): array
+    {
+        $images = [];
+
+        $imagesCollection = $this->getMedia('product_images');
+
+        foreach ($imagesCollection as $media) {
+            $images[] = $media->getUrl();
+        }
+
+        if (empty($images)) {
+            $images[] = url('img/no-image.png');
+        }
+
+        return $images;
+    }
 }

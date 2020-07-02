@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 /**
@@ -35,6 +36,7 @@ class ProductStoreRequest extends FormRequest
             'vat' => 'required|in:21,5,0',
             'description' => 'nullable|string',
             'quantity' => 'required|integer|min:0',
+            'image1'=> 'nullable|image',
         ];
     }
 
@@ -105,5 +107,10 @@ class ProductStoreRequest extends FormRequest
     public function getQuantity(): int
     {
         return $this->input('quantity');
+    }
+
+    public function getImage1(): ?UploadedFile
+    {
+        return $this->file('image1');
     }
 }

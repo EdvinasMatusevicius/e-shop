@@ -30,7 +30,9 @@
                             @foreach($list as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td></td>
+                                    <td>
+                                        <img src="{{ $item->getFirstImageUrl()}}" alt="producto nuotrauka" width="70">
+                                    </td>
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->price }}</td>

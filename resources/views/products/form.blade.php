@@ -42,6 +42,14 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="image1">Images</label>
+                                <input class="form-control-file" id="image1" name="image1" value="" type="file">
+                                @error('image1')
+                                <em class="alert-danger">{{ $message }}</em>
+                                @enderror
+                            </div>
+                            
+                            <div class="form-group">
                                 <label for="price">Price</label>
                                 <input class="form-control @error('price') is-invalid @enderror" id="price" type="text"
                                        name="price" value="{{ old('price', 0.01) }}" min="0.01">
